@@ -129,8 +129,6 @@ class PacketManager():
                     else:
                         pid = int(str(self.headerSock.recv(packetIDSize)).replace('n',''))
                         dataCount = int(str(self.headerSock.recv(dataCountSize)).replace('n', ''))
-                    print str(pid)
-                    print str(dataCount)
                     
                     packet = Packet(pid)
                     
@@ -299,7 +297,6 @@ class PacketServer(Thread):
             if (str(headerAddress[0]) == str(dataAddress[0])):
                 headerClient.send(str(0))
                 lang = int(str(headerClient.recv(1)))
-                print str(lang)
                 fullAddress = [headerAddress[0],headerAddress[1],dataAddress[1]]
                 self.managers.append(PacketManager(headerClient,dataClient,fullAddress,self.onReceive,self.onDisconnect,lang))
                 self.onConnect(fullAddress)
